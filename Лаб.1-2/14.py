@@ -20,3 +20,8 @@ def string_list(lines):
 
 res = string_list(lines)
 print(res)
+
+# def string_list(lines):
+#     print(random.choice(lines).upper())
+
+# string_list(lines)

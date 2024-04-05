@@ -4,4 +4,6 @@
 
 name, surname, patronymic = input(), input(), input()
 
-print(f"{surname} {name[0]}.{patronymic[0]}.")
+#print(f"{surname} {name[0]}.{patronymic[0]}.")
+
+print('{} {}. {}.'.format(surname,name[0],patronymic[0]))

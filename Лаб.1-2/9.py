@@ -10,9 +10,8 @@ d = random.randint(1, 31)  # день
 
 
 def date(day, month, year):
-    return datetime.date(year, month, day).strftime("%d-%m-%Y")
+    print (datetime.date(year, month, day).strftime("%d-%m-%Y"))
 
+# date(d,m,y)
 
-res = date(day=d, month=m, year=y)
-
-print(res)
+date(random.randint(1, 31),random.randint(1, 12),random.randint(1995, 2004))

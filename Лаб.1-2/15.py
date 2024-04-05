@@ -8,12 +8,13 @@
 # 3) digit_count — количество цифровых символов
 
 
-s = "словари – изменяемые коллекции элементов с произвольными индексами – ключами"
+s = "словари – изменяемые коллекции элементов с произвольными индексами – ключами "
 
 l = len(s)
 w_c = 0
 d_c = 0
 s = s.split(" ")
+print(s)
 
 for i in s:
     if i.isalpha() == True:
@@ -22,9 +23,17 @@ for i in s:
         d_c += 1
 
 
-def stroka(s):
-    return l, w_c, d_c
+# def stroka(s):
+#    return l, w_c, d_c
+
+# my_dict = {"length ": l, "words_count": w_c, "digit_count": d_c}
+# print(my_dict)
 
 
-my_dict = {"length ": l, "words_count": w_c, "digit_count": d_c}
-print(my_dict)
+def stroka(s,l, w_c, d_c):
+    print({"length ": l, "words_count": w_c, "digit_count": d_c})
+
+stroka(s,l, w_c, d_c)
+
+# isalpha() - проверяет состоит ли строка только из букв
+# isdigit()  - проверяет состоит ли строка только из цифр

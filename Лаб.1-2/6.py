@@ -6,6 +6,10 @@
 
 s = input()
 
-for i in range(len(s)):
-    if i % 2 == 0:
-        print(s[i])
+#for i in range(len(s)):
+#    if i % 2 == 0:
+#        print(s[i])
+
+for i in range(0,len(s),2):
+    print(s[i])
+    

@@ -20,9 +20,11 @@ my_dict = {
     5: "пять",
 }
 
-if num in range(-5, 5 + 1):
-    for key, value in my_dict.items():
-        if num == key:
-            print(value)
-else:
-    print("Введеное число не принадлежит интервалу от -5 до 5")
+result = my_dict.get(num, "Введеное число не принадлежит интервалу от -5 до 5")
+print(result)
+# if num in range(-5, 5 + 1):
+#     for key, value in my_dict.items():
+#         if num == key:
+#             print(value)
+# else:
+#     print("Введеное число не принадлежит интервалу от -5 до 5")

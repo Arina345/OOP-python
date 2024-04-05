@@ -10,4 +10,4 @@ for _ in range(10):
 
 my_list.sort()
 
-print(*my_list)
+print(*my_list, sep='-')

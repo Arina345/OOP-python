@@ -8,37 +8,43 @@
 import random
 
 number = random.randint(0, 10)
-# print(number)
+print(number)
 
-k = 0
-# Решение с использованием цикла for
-
-for _ in range(3):
-    user = int(input())
-    if user == number:
-        print("Поздравляю с победой!!!")
-        break
-    elif user != number:
-        k += 1
-        if k == 3:
-            print(f"Правильный ответ:{number}")
-
-# Решение с использованием цикла for
-
-
-# Решение с использованием цикла while
 # k = 0
+# Решение с использованием цикла for
 
-# while k != 3:
-#    user = int(input())
-#    k += 1
+# for _ in range(3):
+#     user = int(input())
+#     if user == number:
+#         print("Поздравляю с победой!!!")
+#         break
+#     elif user != number:
+#         k += 1
+#         if k == 3:
+#             print(f"Правильный ответ:{number}")
 
-# if user == number:
-#    print("Поздравляю с победой!!!")
-# elif k == 3:
-#    print(f"Правильный ответ: {number}")
+# Решение с использованием цикла for
+
 
 # Решение с использованием цикла while
 
+k=0
+
+
+while k!=3:
+	user = int(input())
+	k+=1
+	if user == number:
+		print("Поздравляю с победой!!!")
+		break
+	if k==3:
+		print(f"Правильный ответ: {number}")
+	
+
+
+
+
+
+# Решение с использованием цикла while
 
 # Оператор break прерывает ближайший цикл for или while

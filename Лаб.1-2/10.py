@@ -27,8 +27,9 @@ def seconds_between_dates(date, date_object=None):
     date = datetime.strptime(date, "%Y-%m-%d")
     return round((date_object - date).total_seconds())
 
-
+# Если указана только дата
 print(seconds_between_dates(d))
+# Если указаны аругмент дата и объект дата
 print(seconds_between_dates(d, d_obj))
 
 
