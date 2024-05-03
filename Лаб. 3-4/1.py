@@ -20,6 +20,7 @@
 # ДОПОЛНИТЕЛЬНО
 
 # В методе add_friend должна осуществляться проверка добавляемого объекта.
+
 # Каждый класс может иметь в «друзьях» не более 2х типов объектов и не более пяти экземпляров в общей сумме.
 # То есть, для класса должны быть определены два типа объектов, которых можно добавить в список, и суммарно в этом списке может быть не более пяти элементов.
 
@@ -29,45 +30,73 @@
 class Cat:
     def __init__(self, name):
         self.name = name
-        self.friends = []
+        self.friend = []
 
     def get_sound(self):
         return "мяу"
 
-    def add_friend(self, friend):
-        self.friends.append(friend)
-        if not isinstance(friend, (Cat, Dog)) and len(self.friends) >= 5:
-            return []
+    def add_friend(self, friends):
+        if isinstance(friends, (Dog, Chicken, str)) == True:
+            self.friend.append(friends)
         else:
-            for f in self.friends:
+            raise ValueError("Объект такого типа нельзя добавить")
+        if len(self.friend) > 5:
+            raise ValueError("В списке больше 5 элементов")
+
+    def list_friend(self):
+        if len(self.friend) > 0:
+            for f in self.friend:
                 print(f)
+        else:
+            print([])
 
 
 class Dog:
     def __init__(self, name):
         self.name = name
-        self.friends = []
+        self.friend = []
 
     def get_sound(self):
         return "гав-гав"
 
-    def add_friend(self, friend):
-        self.friends.append(friend)
+    def add_friend(self, friends):
+        if isinstance(friends, (Cat, Chicken, str)) == True:
+            self.friend.append(friends)
+        else:
+            raise ValueError("Объект такого типа нельзя добавить")
+        if len(self.friend) > 5:
+            raise ValueError("В списке больше 5 элементов")
 
-        # s = len(set(type(i) for i in self.friends))
-        # print(s)
+    def list_friend(self):
+        if len(self.friend) > 0:
+            for f in self.friend:
+                print(f)
+        else:
+            print([])
 
 
 class Chicken:
     def __init__(self, name):
         self.name = name
-        self.friends = []
+        self.friend = []
 
     def get_sound(self):
         return "чик-чик"
 
-    def add_friend(self, friend):
-        self.friends.append(friend)
+    def add_friend(self, friends):
+        if isinstance(friends, (Cat, Dog, str)) == True:
+            self.friend.append(friends)
+        else:
+            raise ValueError("Объект такого типа нельзя добавить")
+        if len(self.friend) > 5:
+            raise ValueError("В списке больше 5 элементов")
+
+    def list_friend(self):
+        if len(self.friend) > 0:
+            for f in self.friend:
+                print(f)
+        else:
+            print([])
 
 
 # Экземпляры классов Cat, Dog, Chicken
@@ -108,13 +137,51 @@ for animal in animals:
 
 
 # --------------------------------------------------------------------------------------------------------------------------------
-print("--------------------------------------------------------")
+print("----------------------ДОПОЛНИТЕЛЬНО----------------------------------")
 
 
 # Добавление друзей
 
-cat.add_friend("Мурзик")
-cat.add_friend(dog.name)
-dog.add_friend(cat.name)
-# print(cat.friends)
-# print(dog.friends)
+
+# ---------------------------------------------------ДРУЗЬЯ CATE-----------------------------------------------------------------------------
+print("----------------------ДРУЗЬЯ CATE----------------------------------")
+
+cat_friend = [
+    Cat("Степан").name,
+    Dog("Пупс"),
+    Dog("Пупс"),
+    Chicken("Петя"),
+    Cat("Мина").name,
+]
+
+for f in cat_friend:
+    cat.add_friend(f)
+
+cat.list_friend()
+
+
+# ---------------------------------------------------ДРУЗЬЯ DOG-----------------------------------------------------------------------------
+print("----------------------ДРУЗЬЯ DOG----------------------------------")
+
+dog_friend = [
+    Dog("Степан").name,
+    Cat("Пупс"),
+    Chicken("Петя"),
+    Cat("Мина").name,
+]
+
+for d in dog_friend:
+    dog.add_friend(d)
+
+dog.list_friend()
+
+
+# ---------------------------------------------------ДРУЗЬЯ CHICKEN-----------------------------------------------------------------------------
+print("----------------------ДРУЗЬЯ CHICKEN----------------------------------")
+
+chicken_friend = [Dog("Степан"), Cat("Пупс"), Chicken("Петя").name]
+
+for c in chicken_friend:
+    chicken.add_friend(c)
+
+chicken.list_friend()
