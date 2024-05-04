@@ -233,55 +233,55 @@
 # - где {…} соответствующее значение атрибута объекта. Переносы строк – обязательны.
 
 
-class Human:
-    def __init__(self, name, surname, middlname, age=0, sex="«М» или «Ж»"):
-        self.name = name
-        self.surname = surname
-        self.middlname = middlname
-        self.age = age
-        self.sex = sex
+# class Human:
+#     def __init__(self, name, surname, middlname, age=0, sex="«М» или «Ж»"):
+#         self.name = name
+#         self.surname = surname
+#         self.middlname = middlname
+#         self.age = age
+#         self.sex = sex
 
-    def get_fio(self):
-        return "{0} {1}.{2}.".format(self.surname, self.name[0], self.middlname[0])
+#     def get_fio(self):
+#         return "{0} {1}.{2}.".format(self.surname, self.name[0], self.middlname[0])
 
-    def get_full_info(self):
-        print(
-            f"Фамилия: {self.surname} \nИмя: {self.name} \nОтчество: {self.middlname} \nПол: {self.sex} \nВозраст: {self.age}"
-        )
-
-
-# Экземпляр класса
-person = Human("Арина", "Крикунова", "Васильевна", 20, "Ж")
-
-print("----------------------get_full_info()----------------------------------")
-print(person.get_full_info())
-print("----------------------get_fio()----------------------------------------")
-print(person.get_fio())
-
-print("----------------------class Student------------------------------------")
-# Создать класс Student, который наследуется от класса Human.
-# Переопределить в данном классе метод __init__ таким образом, чтобы он
-# принимал обязательный параметр номера группы в формате строки.
+#     def get_full_info(self):
+#         print(
+#             f"Фамилия: {self.surname} \nИмя: {self.name} \nОтчество: {self.middlname} \nПол: {self.sex} \nВозраст: {self.age}"
+#         )
 
 
-# Переопределить метод get_full_info таким образом, чтобы к выводу добавилась строка «Группа: {…}».
+# # Экземпляр класса
+# person = Human("Арина", "Крикунова", "Васильевна", 20, "Ж")
+
+# print("----------------------get_full_info()----------------------------------")
+# print(person.get_full_info())
+# print("----------------------get_fio()----------------------------------------")
+# print(person.get_fio())
+
+# print("----------------------class Student------------------------------------")
+# # Создать класс Student, который наследуется от класса Human.
+# # Переопределить в данном классе метод __init__ таким образом, чтобы он
+# # принимал обязательный параметр номера группы в формате строки.
 
 
-class Student(Human):
-    def __init__(self, name, surname, middlname, age, sex, ng):
-        super().__init__(name, surname, middlname, age, sex)
-        self.ng = ng
-
-    def get_full_info(self):
-        # вызываем метод родительского класса
-        super().get_full_info()
-        # Добавляем свое поведение
-        return f"Группа: {self.ng}"
+# # Переопределить метод get_full_info таким образом, чтобы к выводу добавилась строка «Группа: {…}».
 
 
-p = Student("Арина", "Крикунова", "Васильевна", 20, "Ж", "ИСТБ-31")
+# class Student(Human):
+#     def __init__(self, name, surname, middlname, age, sex, ng):
+#         super().__init__(name, surname, middlname, age, sex)
+#         self.ng = ng
 
-print(p.get_full_info())
+#     def get_full_info(self):
+#         # вызываем метод родительского класса
+#         super().get_full_info()
+#         # Добавляем свое поведение
+#         return f"Группа: {self.ng}"
+
+
+# p = Student("Арина", "Крикунова", "Васильевна", 20, "Ж", "ИСТБ-31")
+
+# print(p.get_full_info())
 
 # person_modern = Student()
 
@@ -339,3 +339,66 @@ print(p.get_full_info())
 
 # x = B()
 # print(x.some_method())
+
+
+# class A:
+
+#     def __init__(self, name):
+#         self.n = name
+
+#     def d(self):
+#         print(f"Hello, {self.n}")
+
+
+# class B(A):
+#     def __init__(self, name, age):
+#         super().__init__(name)
+#         self.a = age
+
+#     def c(self):
+#         print(super().d(), sep=",")
+
+
+# x = A("Arina")
+
+# z = B(x.n, age=20)
+
+# print(z.c())
+
+
+#         about = {
+#             "Фамилия": self.surname,
+#             "Имя": self.name,
+#             "Отчество": self.middlname,
+#             "Пол": self.sex,
+#             "Возраст": self.age,
+#         }
+
+#         print("\n".join("{0}: {1}".format(key, value) for key, value in about.items()))
+
+# print(
+#     f"Фамилия: {self.surname} \nИмя: {self.name} \nОтчество: {self.middlname} \nПол: {self.sex} \nВозраст: {self.age}"
+# )
+
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def get_info(self):
+        return f"Name: {self.name}\nAge: {self.age}"
+
+
+class Student(Person):
+    def __init__(self, name, age, student_id):
+        super().__init__(name, age)
+        self.student_id = student_id
+
+    def get_full_info(self):
+        info = super().get_info().replace("\n", ", ")
+        return f"{info}, Student ID: {self.student_id}"
+
+
+student = Student("John Doe", 20, "123456")
+print(student.get_full_info())

@@ -37,9 +37,11 @@ class Human:
         return "{0} {1}.{2}.".format(self.surname, self.name[0], self.middlname[0])
 
     def get_full_info(self):
-        print(
-            f"Фамилия: {self.surname} \nИмя: {self.name} \nОтчество: {self.middlname} \nПол: {self.sex} \nВозраст: {self.age}"
+        return "Фамилия: {0}\nИмя: {1}\nОтчество: {2}\nПол: {3}\nВозраст: {4}".format(
+            self.surname, self.name, self.middlname, self.sex, self.age
         )
+
+        # return f"Фамилия: {self.surname}\nИмя: {self.name}\nОтчество: {self.middlname}\nВозраст: {self.age}\nПол: {self.sex}"
 
 
 # Экземпляр класса
@@ -67,12 +69,14 @@ class Student(Human):
 
     def get_full_info(self):
         # вызываем метод родительского класса
-        super().get_full_info()
+        print(super().get_full_info())
         # Добавляем свое поведение
-        return f"Группа: {self.ng}"
+        return "Группа: {0}".format(self.ng)
 
 
-p = Student("Арина", "Крикунова", "Васильевна", 20, "Ж", "ИСТБ-31")
+p = Student(
+    person.name, person.surname, person.middlname, person.age, person.sex, ng="ИСТБ-31"
+)
 
 print(p.get_full_info())
 
@@ -81,3 +85,22 @@ print("----------------------ДОПОЛНИТЕЛЬНО-------------------------
 
 # Использование super – обязательно.
 # Метод get_full_info для student должен предусматривать возможность возврата строки, где вместо переноса строк используется запятая.
+
+
+class Student(Human):
+    def __init__(self, name, surname, middlname, age, sex, ng):
+        super().__init__(name, surname, middlname, age, sex)
+        self.ng = ng
+
+    def get_full_info(self):
+        # вызываем метод родительского класса и добавляем свое поведение
+        new_format = super().get_full_info().replace("\n", ",")
+        return "{0},{1}".format(new_format, self.ng)
+        # return f"{new_format},Группа: {self.ng}"
+
+
+p = Student(
+    person.name, person.surname, person.middlname, person.age, person.sex, ng="ИСТБ-31"
+)
+
+print(p.get_full_info())
