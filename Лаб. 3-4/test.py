@@ -380,25 +380,104 @@
 #     f"Фамилия: {self.surname} \nИмя: {self.name} \nОтчество: {self.middlname} \nПол: {self.sex} \nВозраст: {self.age}"
 # )
 
-
-class Person:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-
-    def get_info(self):
-        return f"Name: {self.name}\nAge: {self.age}"
-
-
-class Student(Person):
-    def __init__(self, name, age, student_id):
-        super().__init__(name, age)
-        self.student_id = student_id
-
-    def get_full_info(self):
-        info = super().get_info().replace("\n", ", ")
-        return f"{info}, Student ID: {self.student_id}"
+# 1. Как объявить класс? Как создать экземпляр класса?
+# 2. Что такое наследование? Приведите пример.
+# 3. Для чего используется полиморфизм?
+# 4. Что такое инкапсуляция и сокрытие данных класса?
+# 5. Как скрыть метод или атрибут?
+# 6. Что такое super в рамках класса?
+# 7. Для чего нужен метод __init__?
+# 8. Для чего нужен метод __setattr__?
+# 9. Если обратиться к несуществующему атрибуту, то это приведет к ошибке, к какой?
 
 
-student = Student("John Doe", 20, "123456")
-print(student.get_full_info())
+# атрибуты и методы типа _x - трогать не стоит
+# атрибуты и методы типа __x - трогать вне класса недопустимо
+# Это не касается методов типа __x__
+
+
+class User:
+    protected_attrs = ("__password", "login", "protected_attrs")
+    login: str
+    __password: str
+
+    def __init__(self, login, password):
+        # для изменения пароля по определенным законам в классе имеется соответсвующий метод (используется принцип DRY)
+        self.set_password(password)
+        # Мы не хотим давать возможность другому программисту изменить логин уже созданного объекта напрямую
+        # Но такая возможность есть у родительского класса (родителем в данном случае будет класс Object)
+        super().__setattr__("login", login)
+
+    # Данный метод отрабатывает всякий раз, когда какому либо аотрибуту класса будет заданно новое значение
+    def __setattr__(self, key, value):  # key - имя атрибута, value - новое значение
+        # Проверяем есть ли имя атрибута в списке запрещенных
+        if key in self.protected_attrs:
+            # В случае, если значение key находится в списке, то будет вызвана ошибка
+            raise AttributeError(f"Нельзя установить данный атрибут {key}")
+        # После вызова ошибки выполнение метода прекратится
+
+        # При попытке установить какой либо аттрибут внутри данного метода можно вызвать рекурсию и переполнить стек вызовов (программа завершится с ошибкой)
+        # Например, self.some_attr = value снова вызовет метод __setattr__ который сделает тоже самое
+        #
+        # У родительского класса Object нет каких либо проверок на установку аттрибутов
+        # Поэтому едиственный способ изменить любой атрибут, это обратиться к поведению родитеского класса через super
+        super().__setattr__(key, value)
+
+    def set_password(self, new_pass):
+        # пустая строка при проверке if new_pass вернет False, то есть мы задаем условие что new_pass не является ''
+        # isinstance(new_pass, str) - проверка что new_pass является строкой или унаследован от нее
+        # and позволяет объединить условия
+        if new_pass and isinstance(
+            new_pass, str
+        ):  # таким образом мы проверяем, что new_pass это строка и она не пустая
+            new_pass += "salt"  # имтируем окрытие пароля, вообще не стоит задумываться над этой строкой
+            super().__setattr__(
+                "__password", new_pass
+            )  # Как упоминалось ранее родительский класс спокойно может изменить атрибут
+        else:
+            raise ValueError(
+                "Пароль не должен быть пустым, а также должен являтся строкой"
+            )
+
+
+user_1 = User("Ivanov", "123")
+
+try:
+    print(f"login: {user_1.login}")
+    print(f"password: {user_1.__password}")
+except:
+    print("Прочитать пароль неудалось, так как атрибут запрещен для чткения")
+
+print()
+try:
+    user_1.login = "Super Ivanov"
+except:
+    print("Изменить логин не удалось")
+
+try:
+    user_1.__password = "Ivanov123!"
+except:
+    print("Изменить пароль напрямую не удалось")
+    user_1.set_password("Ivanov123!")
+    print("Изменить пароль специальным методом возможно")
+
+
+# публичными (public) — данные доступны всем;
+# приватными (private) — данные доступны только объекту/классу которому они принадлежат.
+
+
+# class Sample:
+#     def __init__(self, rows, columns):
+#         self.rows = rows
+#         self.columns = columns
+#         self.gen = self.gen()
+
+#     def gen(self):
+#         yield (0, 0, 1)
+#         yield (0, 1, 2)
+#         yield (1, 0, 1)
+
+
+# f_Sample = Sample(1, 2)
+# for i in f_Sample.gen:
+#     print(i)
