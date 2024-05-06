@@ -7,3 +7,21 @@
 # внутри класса никак не связаны.
 # 3) BrokenLine – ломанная линия, при создании принимает список
 # экземпляров Point. Список должен содержать не менее 3х точек.
+
+
+class Point:
+    def __init__(self, name, x, y):
+        self.n = name  # имя точки
+        self.x = x  # координаты точки по x
+        self.y = y  # координаты точки по y
+
+
+class Segment:
+    def __init__(self, point_one, point_two):
+        self.one = point_one
+        self.two = point_two
+
+
+class BrokenLine:
+    def __init__(self, points):
+        self.list = points
