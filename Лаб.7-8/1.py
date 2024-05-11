@@ -37,7 +37,7 @@ class File:
             return f"Слово -{self.word}- не было удалено,так как его нет в списке слов {self.words}"
 
     def update_source(self):
-        with open(self.p, "w+") as text_file:
+        with open(self.p, "w+", encoding="utf-8") as text_file:
             text_file.write(" ".join(self.words))
             text_file.seek(0)
             return text_file.read()
@@ -46,16 +46,16 @@ class File:
     # Добавить метод delete_char, который удаляет переданный символ из всех слов списка words.
     def delete_char(self, symbol):
         self.symbol = symbol
-        with open(self.p, "r+") as text_file:
+        with open(self.p, "r+", encoding="utf-8") as text_file:
             return text_file.read().replace(self.symbol, "")
 
 
-file = File("C:/Users/Арина Крикунова/Downloads/file.txt")
-# file = File("text.file")
+# file = File("C:/Users/Арина Крикунова/Downloads/file.txt")
+file = File("file.txt")
 
 print(file.path())
 
-with open(file.p, "w+") as text_file:
+with open(file.p, "w+", encoding="utf-8") as text_file:
     text_file.write(
         "open возвращает дескриптор файла, полученный Python-приложением от вашей операционной системы."
     )
@@ -65,7 +65,6 @@ with open(file.p, "w+") as text_file:
 
 print(file.delete_word("вашей"))
 print(file.update_source())
-print(file.words)
 print()
 print(file.delete_char("о"))
 
