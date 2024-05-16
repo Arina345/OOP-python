@@ -29,7 +29,7 @@ for section, commands in city.items():
 
 html_template = """<html>
 <head>
-<title> Задание 3.Лабортаорная работа 9-10 </title>
+<title> Задание 3.Лабораторная работа 9-10 </title>
 <link rel="stylesheet"  href="css/style.css">
 <script src="filter.js"></script>
 </head>

@@ -32,7 +32,7 @@ class File:
         "Если это слово есть в списке words, то удаляем"
         if self.word in self.words:
             self.words.remove(self.word)
-            return f"Слово -{self.word}- было  успешно удалено {self.words}"
+            return f"Слово -{self.word}- было  успешно удалено из списка {self.words}"
         else:
             return f"Слово -{self.word}- не было удалено,так как его нет в списке слов {self.words}"
 
@@ -63,7 +63,7 @@ with open(file.p, "w+", encoding="utf-8") as text_file:
     file.words = [el for el in text_file.read().split(" ")]
     text_file.close()
 
-print(file.delete_word("вашей"))
+print(file.delete_word("от"))
 print(file.update_source())
 print()
 print(file.delete_char("о"))

@@ -13,7 +13,7 @@ import csv, json
 
 
 class City:
-    def __init__(self, index, tregion, region, city, pop) -> None:
+    def __init__(self, index, tregion, region, city, pop):
         self.index = index
         self.tregion = tregion
         self.region = region
@@ -152,4 +152,9 @@ data = {"City": [i for i in lines]}
 
 
 with open("City_newfile.json", "w", encoding="utf-8") as new_file:
-    new_file.write(json.dumps(data, indent=2, ensure_ascii=False))
+    json.dump(data, new_file, indent=2, ensure_ascii=False)
+    # new_file.write(json.dumps(data, indent=2, ensure_ascii=False))
+
+
+# Хеши используются для быстрого сравнения ключей словаря во время поиска по нему.
+# Хеш - это результат хеширования, т.е. операции по преобразованию данных в строку или число фиксированной длины.

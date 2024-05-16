@@ -1,12 +1,12 @@
 # "---------------------1. Как объявить класс? Как создать экземпляр класса?---------------------"
 
 
-# объявление класса
+# Класс описывается с помощью ключевого слова class
 class Person:
     pass
 
 
-# Класс описывается с помощью ключевого слова class
+# Экземпляр класса
 p = Person()
 # Сначала указывается имя нового объекта, за которым следует оператор присваивания
 # и имя класса с параметрами (как определено в _init_).
@@ -26,7 +26,7 @@ class Staff:
         return f"Этот сотрудник принадлежит отделу {self.d}"
 
 
-class worker(Staff):
+class Worker(Staff):
     def __init__(self, place, experience, department, name="Андрей", age=27):
         super().__init__(place, experience, department)
         self.name = name
@@ -39,8 +39,7 @@ class worker(Staff):
 
 s = Staff("enteprice", 5, "IT")
 
-# w_one = workerone()
-w = worker(s.p, s.e, s.d)
+w = Worker(s.p, s.e, s.d)
 print(w.about_worker())
 # print(s.place_worker())
 
